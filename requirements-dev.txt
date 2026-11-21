@@ -1,5 +1,4 @@
 -r requirements.txt
-scikit-learn
 python-calamine
 matplotlib
 seaborn
