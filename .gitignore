@@ -6,3 +6,6 @@ __pycache__/
 .env
 .ipynb_checkpoints/
 .DS_Store
+
+data/raw/*.xls
+data/raw/*.zip
