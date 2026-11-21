@@ -4,6 +4,8 @@ Predicción de impago de clientes de tarjeta de crédito: limpieza y auditoría 
 
 **🔗 App desplegada:** https://credit-card-default-risk-faathmnelyoxkmebzrgzgf.streamlit.app/
 
+![Simulador de cliente](reports/figures/simulador.png)
+
 ## Resultados principales
 
 | Modelo | ROC-AUC (prueba) | ROC-AUC (validación cruzada) | PR-AUC |
