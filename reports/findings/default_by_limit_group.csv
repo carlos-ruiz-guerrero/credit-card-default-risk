@@ -1,0 +1,5 @@
+limit_group,clientes,impagos,tasa_impago
+Q1 (bajo),7676,2440,0.3179
+Q2,7614,1882,0.2472
+Q3,7643,1326,0.1735
+Q4 (alto),7067,988,0.1398
