@@ -1,0 +1,6 @@
+{
+  "threshold": 0.16,
+  "cost_fn": 5,
+  "cost_fp": 1,
+  "model": "Gradient Boosting"
+}

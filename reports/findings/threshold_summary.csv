@@ -1,0 +1,4 @@
+escenario,fn,fp,coste_total,coste_por_cliente,precision,recall
+Sin modelo (aprobar a todos),1327,0,6635,1.1058,0.0,0.0
+"Umbral 0,50",840,247,4447,0.7412,0.6635,0.367
+Umbral óptimo (0.16),314,1736,3306,0.551,0.3685,0.7634
