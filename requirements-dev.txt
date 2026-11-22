@@ -1,6 +1,8 @@
 -r requirements.txt
+-r requirements-api.txt
 python-calamine
 matplotlib
 seaborn
 jupyter
 pytest
+httpx
