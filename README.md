@@ -96,4 +96,10 @@ reports/figures/     Gráficos
    streamlit run app/streamlit_app.py
    ```
 
-El modelo guardado depende de la versión de scikit-learn (1.9.1), fijada en `requirements.txt`.
+El modelo guardado depende de la versión de scikit-learn (1.9.1), fijada en `requirements.txt`. 
+
+Próximos pasos sugeridos: 
+
+1. GitHub Action que ejecute `pytest` en cada `push` (con la insignia de "passing").
+2. Hacer que Streamlit consuma la API en lugar de cargar el modelo directamente, que es la arquitectura habitual en producción. 
+3. Añadir contenedores de docker para empaquetar la API
