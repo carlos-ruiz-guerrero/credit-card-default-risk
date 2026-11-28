@@ -102,4 +102,48 @@ Próximos pasos sugeridos:
 
 1. GitHub Action que ejecute `pytest` en cada `push` (con la insignia de "passing").
 2. Hacer que Streamlit consuma la API en lugar de cargar el modelo directamente, que es la arquitectura habitual en producción. 
-3. Añadir contenedores de docker para empaquetar la API
+3. Añadir contenedores de docker para empaquetar la API 
+
+## API
+
+Además del dashboard, el modelo se sirve como API REST con FastAPI (`src/credit_default/api/`).
+
+### Arrancarla en local
+
+```bash
+pip install -r requirements-api.txt
+# Linux/Mac: PYTHONPATH=src  ·  PowerShell: $env:PYTHONPATH = "src"
+uvicorn credit_default.api.main:app --reload
+```
+
+La documentación interactiva (Swagger) está en http://127.0.0.1:8000/docs, donde se puede probar `POST /predict` con un ejemplo ya rellenado.
+
+### Con Docker
+
+```bash
+docker build -t credit-default-api .
+docker run --rm -p 8000:8000 credit-default-api
+```
+
+### Endpoints
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/health` | Comprobación de estado |
+| GET | `/model-info` | Modelo, umbral, costes, variables y versiones de scikit-learn |
+| POST | `/predict` | Probabilidad de impago de un cliente y decisión |
+| POST | `/predict/batch` | Lo mismo para hasta 1.000 clientes |
+
+Ejemplo de respuesta de `/predict`:
+
+```json
+{ "probability": 0.0686, "threshold": 0.16, "flagged": false }
+```
+
+### Detalles de diseño
+
+- **Validación estricta de entradas** (Pydantic): edad entre 18 y 100, `education` entre 1 y 4, `pay_*` entre -2 y 8, importes no negativos. Los datos inválidos devuelven un error 422.
+- **El campo `sex` se rechaza a propósito**: el modelo no lo usa y la API no lo acepta, para que esa decisión quede reflejada en el contrato.
+- **Umbral por defecto** tomado de `models/threshold.json` (0,16, elegido según el coste de cada error). Se puede sobrescribir con `?threshold=0.3`.
+- El modelo se carga una sola vez al arrancar, y la API avisa en el log si la versión de scikit-learn no coincide con la del entrenamiento (`1.9.1`).
+- Proyecto educativo: no debe usarse para decisiones reales de crédito.
