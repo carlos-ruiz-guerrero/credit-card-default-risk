@@ -1,0 +1,12 @@
+.venv
+.git
+.idea
+.github
+__pycache__
+*.pyc
+data
+reports
+app
+notebooks
+tests
+README.md
